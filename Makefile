@@ -24,3 +24,6 @@ deps/build/glfw:
 
 deps/clean:
 	rm -rf lib/glfw/_build
+
+run: all
+	./build/main
