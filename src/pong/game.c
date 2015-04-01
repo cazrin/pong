@@ -2,7 +2,7 @@
 
 #include "game.h"
 
-Game* Game_init(GLFWwindow *window) {
+Game *Game_init(GLFWwindow *window) {
 	Game* game = malloc(sizeof(Game));
 
 	float current_time = glfwGetTime();
@@ -25,6 +25,9 @@ Game* Game_init(GLFWwindow *window) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	// Create game entities
+	game->ball = Ball_init(game, window_width/2, window_height/2);
+
 	return game;
 }
 
@@ -34,6 +37,8 @@ void Game_destroy(Game *game) {
 void Game_draw(Game *game) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
+
+	Ball_draw(game->ball);
 }
 
 void Game_update(Game *game) {
@@ -42,4 +47,6 @@ void Game_update(Game *game) {
 	game->current_frame = current_time;
 	float delta_time = game->current_frame - game->last_frame;
 	game->last_frame = current_time;
+
+	Ball_update(game->ball, delta_time);
 }
