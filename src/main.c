@@ -1,5 +1,7 @@
 #include <GLFW/glfw3.h>
 
+#include "game.h"
+
 int main(int argc, char *argv[]) {
 	GLFWwindow *window;
 
@@ -16,10 +18,17 @@ int main(int argc, char *argv[]) {
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
+	Game *game = Game_init(window);
+
 	while(!glfwWindowShouldClose(window)) {
+		Game_update(game);
+		Game_draw(game);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
+
+	Game_destroy(game);
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

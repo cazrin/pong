@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -g -Ilib/glfw/include/
+CFLAGS=-Wall -g -Isrc/pong/ -Ilib/glfw/include/
 FILES=src/main.c $(wildcard src/pong/*.c)
 FRAMEWORKS=-framework CoreVideo -framework Cocoa -framework IOKit -framework OpenGL
 LIBS=-Llib/glfw/_build/src/ -lglfw
