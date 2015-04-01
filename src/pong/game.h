@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 
 #include "ball.h"
+#include "paddle.h"
 #include "types.h"
 
 struct Game {
@@ -11,6 +12,9 @@ struct Game {
 	float current_frame, last_frame;
 
 	Ball *ball;
+
+	int number_of_paddles;
+	Paddle **paddles;
 };
 
 Game *Game_init(GLFWwindow *window);

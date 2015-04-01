@@ -28,6 +28,11 @@ Game *Game_init(GLFWwindow *window) {
 	// Create game entities
 	game->ball = Ball_init(game, window_width/2, window_height/2);
 
+	game->number_of_paddles = 2;
+	game->paddles = calloc(sizeof(Paddle), game->number_of_paddles);
+	game->paddles[0] = Paddle_init(game, 0, frame_height / 2 - 50);
+	game->paddles[1] = Paddle_init(game, frame_width - 10, frame_height / 2 - 50);
+
 	return game;
 }
 
@@ -39,6 +44,11 @@ void Game_draw(Game *game) {
 	glLoadIdentity();
 
 	Ball_draw(game->ball);
+
+	int i;
+	for (i = 0; i < game->number_of_paddles; i++) {
+		Paddle_draw(game->paddles[i]);
+	}
 }
 
 void Game_update(Game *game) {
@@ -49,4 +59,9 @@ void Game_update(Game *game) {
 	game->last_frame = current_time;
 
 	Ball_update(game->ball, delta_time);
+
+	int i;
+	for (i = 0; i < game->number_of_paddles; i++) {
+		Paddle_update(game->paddles[i], delta_time);
+	}
 }
