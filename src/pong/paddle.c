@@ -1,5 +1,6 @@
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "input.h"
 #include "paddle.h"
@@ -17,6 +18,18 @@ Paddle *Paddle_init(Game *game, float x, float y) {
 	paddle->move_speed = 500.0f;
 
 	return paddle;
+}
+
+void Paddle_collision(Paddle *paddle, Collision *collision) {
+	if (strcmp(collision->entity_name, "BottomWall") == 0) {
+		Wall *wall = collision->entity;
+		paddle->position.y = wall->position.y + wall->size.height;
+	}
+
+	if (strcmp(collision->entity_name, "TopWall") == 0) {
+		Wall *wall = collision->entity;
+		paddle->position.y = wall->position.y - paddle->size.height;
+	}
 }
 
 void Paddle_draw(Paddle *paddle) {
