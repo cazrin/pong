@@ -16,6 +16,7 @@ Paddle *Paddle_init(Game *game, float x, float y) {
 	};
 
 	paddle->move_speed = 500.0f;
+	paddle->score = 0;
 
 	return paddle;
 }

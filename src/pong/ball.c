@@ -49,7 +49,13 @@ void Ball_collision(Ball *ball, Collision *collision) {
 		ball->direction.y = -ball->direction.y;
 	}
 
-	if (strcmp(collision->entity_name, "LeftWall") == 0 || strcmp(collision->entity_name, "RightWall") == 0) {
+	if (strcmp(collision->entity_name, "LeftWall") == 0) {
+		ball->game->paddles[1]->score += 1;
+		Ball_reset(ball);
+	}
+
+	if (strcmp(collision->entity_name, "RightWall") == 0) {
+		ball->game->paddles[0]->score += 1;
 		Ball_reset(ball);
 	}
 }
