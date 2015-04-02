@@ -6,6 +6,7 @@
 #include "ball.h"
 #include "paddle.h"
 #include "types.h"
+#include "wall.h"
 
 struct Game {
 	GLFWwindow *window;
@@ -15,6 +16,9 @@ struct Game {
 
 	int number_of_paddles;
 	Paddle **paddles;
+
+	int number_of_walls;
+	Wall **walls;
 };
 
 Game *Game_init(GLFWwindow *window);

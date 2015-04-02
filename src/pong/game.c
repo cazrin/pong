@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "game.h"
+#include "physics.h"
 
 Game *Game_init(GLFWwindow *window) {
 	Game* game = malloc(sizeof(Game));
@@ -40,6 +41,14 @@ Game *Game_init(GLFWwindow *window) {
 	game->paddles[1]->move_up_key = GLFW_KEY_UP;
 	game->paddles[1]->move_down_key = GLFW_KEY_DOWN;
 
+	game->number_of_walls = 4;
+	game->walls = calloc(sizeof(Wall), game->number_of_walls);
+
+	game->walls[0] = Wall_init(game, "BottomWall", 0, 0, window_width, 10);
+	game->walls[1] = Wall_init(game, "TopWall", 0, window_height - 10, window_width, 10);
+	game->walls[2] = Wall_init(game, "LeftWall", -10, 0, 10, window_height);
+	game->walls[3] = Wall_init(game, "RightWall", window_width, 0, 10, window_height);
+
 	return game;
 }
 
@@ -56,6 +65,10 @@ void Game_draw(Game *game) {
 	for (i = 0; i < game->number_of_paddles; i++) {
 		Paddle_draw(game->paddles[i]);
 	}
+
+	for (i = 0; i < game->number_of_walls; i++) {
+		Wall_draw(game->walls[i]);
+	}
 }
 
 void Game_update(Game *game) {
@@ -71,4 +84,6 @@ void Game_update(Game *game) {
 	for (i = 0; i < game->number_of_paddles; i++) {
 		Paddle_update(game->paddles[i], delta_time);
 	}
+
+	Physics_update(game);
 }
