@@ -30,8 +30,8 @@ Game *Game_init(GLFWwindow *window) {
 
 	game->number_of_paddles = 2;
 	game->paddles = calloc(sizeof(Paddle), game->number_of_paddles);
-	game->paddles[0] = Paddle_init(game, 0, frame_height / 2 - 50);
-	game->paddles[1] = Paddle_init(game, frame_width - 10, frame_height / 2 - 50);
+	game->paddles[0] = Paddle_init(game, 0, window_height / 2 - 50);
+	game->paddles[1] = Paddle_init(game, window_width - 10, window_height / 2 - 50);
 
 	return game;
 }
