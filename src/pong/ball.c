@@ -32,6 +32,7 @@ void Ball_collision(Ball *ball, Collision *collision) {
 		}
 
 		ball->direction.x = -ball->direction.x;
+		ball->direction.y = ((ball->position.y - paddle->position.y) / paddle->size.height) - 0.5f;
 	}
 
 	if (strcmp(collision->entity_name, "BottomWall") == 0) {
