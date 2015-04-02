@@ -4,6 +4,7 @@
 
 Game *Game_init(GLFWwindow *window) {
 	Game* game = malloc(sizeof(Game));
+	game->window = window;
 
 	float current_time = glfwGetTime();
 	game->current_frame = current_time;
@@ -30,8 +31,14 @@ Game *Game_init(GLFWwindow *window) {
 
 	game->number_of_paddles = 2;
 	game->paddles = calloc(sizeof(Paddle), game->number_of_paddles);
+
 	game->paddles[0] = Paddle_init(game, 0, window_height / 2 - 50);
+	game->paddles[0]->move_up_key = GLFW_KEY_W;
+	game->paddles[0]->move_down_key = GLFW_KEY_S;
+
 	game->paddles[1] = Paddle_init(game, window_width - 10, window_height / 2 - 50);
+	game->paddles[1]->move_up_key = GLFW_KEY_UP;
+	game->paddles[1]->move_down_key = GLFW_KEY_DOWN;
 
 	return game;
 }

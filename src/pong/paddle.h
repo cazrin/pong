@@ -11,6 +11,9 @@ struct Paddle {
 
 	Position position;
 	Size size;
+
+	int move_up_key, move_down_key;
+	float move_speed;
 };
 
 Paddle *Paddle_init(Game *game, float x, float y);

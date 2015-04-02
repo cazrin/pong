@@ -3,4 +3,5 @@ typedef struct Size Size;
 
 typedef struct Ball Ball;
 typedef struct Game Game;
+typedef struct Input Input;
 typedef struct Paddle Paddle;

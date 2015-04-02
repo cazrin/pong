@@ -1,5 +1,7 @@
+#include <GLFW/glfw3.h>
 #include <stdlib.h>
 
+#include "input.h"
 #include "paddle.h"
 
 Paddle *Paddle_init(Game *game, float x, float y) {
@@ -11,6 +13,8 @@ Paddle *Paddle_init(Game *game, float x, float y) {
 		.x = x,
 		.y = y
 	};
+
+	paddle->move_speed = 500.0f;
 
 	return paddle;
 }
@@ -32,4 +36,11 @@ void Paddle_draw(Paddle *paddle) {
 }
 
 void Paddle_update(Paddle *paddle, float delta_time) {
+	if (Input_key_pressed(paddle->game, paddle->move_up_key)) {
+		paddle->position.y += paddle->move_speed * delta_time;
+	}
+
+	if (Input_key_pressed(paddle->game, paddle->move_down_key)) {
+		paddle->position.y -= paddle->move_speed * delta_time;
+	}
 }

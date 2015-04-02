@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "ball.h"
+#include "input.h"
 
 Ball *Ball_init(Game *game, float x, float y) {
 	Ball *ball = malloc(sizeof(Ball));
